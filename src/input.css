@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
+
+.animate-progress-bar {
+	animation: progress-bar 2s ease-in-out;
+}
+
+@keyframes progress-bar {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: 100%;
+	}
+}
+
+.show {
+	animation: show 0.5s ease-in-out;
+}
+
+.hide {
+	animation: hide 0.5s ease-in-out forwards;
+}
+
+@keyframes show {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes hide {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+
 @tailwind utilities;
