@@ -2,7 +2,20 @@
 module.exports = {
 	content: ['./dist/index.html', './dist/**/*.js'],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				sans: ['Montserrat', 'sans-serif'],
+			},
+			container: {
+				center: true,
+			},
+			colors: {
+				
+			},
+		},
 	},
-	plugins: [],
+	plugins: [require('daisyui')],
+	daisyui: {
+		themes: ['synthwave'],
+	},
 }

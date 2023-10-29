@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "target": "ES2015",
+        "module": "ES2015"
+        // "ignoreDeprecations": "5.0"
+    }
+}

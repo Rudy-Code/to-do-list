@@ -4,12 +4,14 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"watch": "tailwindcss -i ./src/input.css -o ./dist/style.css --watch --minify"
+		"watch": "tailwindcss -i ./src/input.css -o ./dist/style.css --watch --minify",
+		"compile": "tsc --watch"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"daisyui": "^3.9.4",
 		"tailwindcss": "^3.3.3"
 	}
 }
