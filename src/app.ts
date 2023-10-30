@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	let showAlerts: boolean = true
 
-	const btnAddNewTask = document.querySelector('.btn-add-new-task')
+	const btnAddNewTask: HTMLButtonElement = document.querySelector('.btn-add-new-task')
 	const inputNewTask: HTMLInputElement = document.querySelector('#input-new-task')
 	const selectCategories: HTMLSelectElement = document.querySelector('#select-categories')
 	const message: HTMLDivElement = document.querySelector('.message')
