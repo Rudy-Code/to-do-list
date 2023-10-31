@@ -6,12 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	const selectCategories: HTMLSelectElement = document.querySelector('#select-categories')
 	const message: HTMLDivElement = document.querySelector('.message')
 	const taskNameError: HTMLElement = document.querySelector('.task-name-error')
+	let btnsDoneTask: NodeList
+
 
 	let categories: string[] = ['gym', 'homework', 'general', 'hobby']
 
 	let selectedCategory: string
 
 	interface Task {
+		id: number
 		name: string
 		done: boolean
 		category?: string
@@ -19,35 +22,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const tasks: Task[] = [
 		{
+			id: 0,
 			name: 'Go to the gym',
 			done: false,
 			category: 'gym',
 		},
 		{
+			id: 1,
 			name: 'Do homework',
 			done: false,
 			category: 'homework',
 		},
 		{
+			id: 2,
 			name: 'Buy milk',
 			done: false,
 			category: 'general',
 		},
 		{
+			id: 3,
 			name: 'Read a book',
 			done: false,
 			category: 'hobby',
 		},
 	]
+	console.log(tasks)
 
 	const renderTasks = (tasks: Task[]) => {
 		const ul = document.querySelector('.tasks-list')
 		ul.innerHTML = ''
 
-		tasks.forEach(task => {
+		tasks.forEach((task, index) => {
 			const li = document.createElement('li')
 			li.innerHTML = `
-			<span style=" word-break: break-all "> ${task.name} </span>
+			<span style="word-break: break-all"> ${task.name}</span>
 
 			<div class="buttons">
 
@@ -86,8 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			</div>
 			`
 			li.classList.add('flex', 'justify-between', 'md:flex-row', 'md:items-center')
+			li.setAttribute('id', `${index}`);
 			ul.appendChild(li)
+
 		})
+		getTaskBtns()
+		
 	}
 
 	const addNewTask = (task: Task) => {
@@ -127,7 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		selectedCategory = selectCategories.value
 		taskNameError.classList.add('hidden')
 		if (inputNewTask.value.trim() !== '') {
+
 			addNewTask({
+				id: tasks.length+1,
 				name: inputNewTask.value,
 				done: false,
 				category: selectedCategory,
@@ -138,6 +152,23 @@ document.addEventListener('DOMContentLoaded', () => {
 			taskNameError.classList.remove('hidden')
 		}
 	})
+
+	const getTaskBtns = () => {
+		btnsDoneTask = document.querySelectorAll('.btn-done-task')
+		console.log(btnsDoneTask)
+
+		btnsDoneTask.forEach((btn) => {
+			btn.addEventListener('click', (e:Event) => {
+				const taskIndex = (e.target as HTMLElement).closest('li').getAttribute('id')
+				tasks[taskIndex].done = true;
+				console.log(tasks)
+			})
+		})
+	}
+
+	const renderDoneTask = () => {
+		
+	}
 
 	renderTasks(tasks)
 })

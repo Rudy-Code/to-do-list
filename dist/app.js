@@ -5,37 +5,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectCategories = document.querySelector('#select-categories');
     const message = document.querySelector('.message');
     const taskNameError = document.querySelector('.task-name-error');
+    let btnsDoneTask;
     let categories = ['gym', 'homework', 'general', 'hobby'];
     let selectedCategory;
     const tasks = [
         {
+            id: 0,
             name: 'Go to the gym',
             done: false,
             category: 'gym',
         },
         {
+            id: 1,
             name: 'Do homework',
             done: false,
             category: 'homework',
         },
         {
+            id: 2,
             name: 'Buy milk',
             done: false,
             category: 'general',
         },
         {
+            id: 3,
             name: 'Read a book',
             done: false,
             category: 'hobby',
         },
     ];
+    console.log(tasks);
     const renderTasks = (tasks) => {
         const ul = document.querySelector('.tasks-list');
         ul.innerHTML = '';
-        tasks.forEach(task => {
+        tasks.forEach((task, index) => {
             const li = document.createElement('li');
             li.innerHTML = `
-			<span style=" word-break: break-all "> ${task.name} </span>
+			<span style="word-break: break-all"> ${task.name}</span>
 
 			<div class="buttons">
 
@@ -74,8 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			</div>
 			`;
             li.classList.add('flex', 'justify-between', 'md:flex-row', 'md:items-center');
+            li.setAttribute('id', `${index}`);
             ul.appendChild(li);
         });
+        getTaskBtns();
     };
     const addNewTask = (task) => {
         tasks.push(task);
@@ -111,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskNameError.classList.add('hidden');
         if (inputNewTask.value.trim() !== '') {
             addNewTask({
+                id: tasks.length + 1,
                 name: inputNewTask.value,
                 done: false,
                 category: selectedCategory,
@@ -122,5 +131,18 @@ document.addEventListener('DOMContentLoaded', () => {
             taskNameError.classList.remove('hidden');
         }
     });
+    const getTaskBtns = () => {
+        btnsDoneTask = document.querySelectorAll('.btn-done-task');
+        console.log(btnsDoneTask);
+        btnsDoneTask.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                const taskIndex = e.target.closest('li').getAttribute('id');
+                tasks[taskIndex].done = true;
+                console.log(tasks);
+            });
+        });
+    };
+    const renderDoneTask = () => {
+    };
     renderTasks(tasks);
 });
