@@ -55,7 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		taskList.innerHTML = ''
 		doneTaskList.innerHTML = ''
 
+		
+
 		tasks.forEach((task, index) => {
+			let svgDoneClass
+			
+				task.done ? svgDoneClass = 'transition-[fill] fill-white stroke-black hover:fill-black hover:stroke-white' : 
+				svgDoneClass = 'transition-[fill] fill-black stroke-white hover:fill-white hover:stroke-black'
+			
+
+
 			const li = document.createElement('li')
 			li.innerHTML = `
 			<span style="word-break: break-all"> ${task.name}</span>
@@ -64,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				<div class="hidden space-y-2 md:block">
 					<button class="btn-done-task px-2">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 				stroke="currentColor" class="w-6 h-6">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 				stroke="currentColor" class="w-6 h-6 ${svgDoneClass}">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 		  				</svg>
 		  
