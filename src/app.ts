@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		{
 			id: 1,
 			name: 'Do homework',
-			done: false,
+			done: true,
 			category: 'homework',
 		},
 		{
@@ -49,8 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.log(tasks)
 
 	const renderTasks = (tasks: Task[]) => {
-		const ul = document.querySelector('.tasks-list')
-		ul.innerHTML = ''
+		const taskList = document.querySelector('.tasks-list')
+		const doneTaskList = document.querySelector('.done-task-list')
+		// console.log(doneTaskList)
+		taskList.innerHTML = ''
+		doneTaskList.innerHTML = ''
 
 		tasks.forEach((task, index) => {
 			const li = document.createElement('li')
@@ -95,7 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			`
 			li.classList.add('flex', 'justify-between', 'md:flex-row', 'md:items-center')
 			li.setAttribute('id', `${index}`);
-			ul.appendChild(li)
+			// console.log(task.done)
+			if(task.done === true) {
+				doneTaskList.appendChild(li)
+				li.querySelector('span').classList.add('line-through','text-zinc-400')
+			}
+			else taskList.appendChild(li)
 
 		})
 		getTaskBtns()
@@ -155,19 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const getTaskBtns = () => {
 		btnsDoneTask = document.querySelectorAll('.btn-done-task')
-		console.log(btnsDoneTask)
 
 		btnsDoneTask.forEach((btn) => {
 			btn.addEventListener('click', (e:Event) => {
 				const taskIndex = (e.target as HTMLElement).closest('li').getAttribute('id')
-				tasks[taskIndex].done = true;
-				console.log(tasks)
+				tasks[taskIndex].done == true ? tasks[taskIndex].done = false : tasks[taskIndex].done = true
+				renderTasks(tasks)
 			})
 		})
-	}
-
-	const renderDoneTask = () => {
-		
 	}
 
 	renderTasks(tasks)
