@@ -19,7 +19,7 @@ const toogleLoginForm = (index) => {
         registrationForm.classList.add('up');
         setTimeout(() => {
             loginForm.classList.add('hidden');
-        }, 800);
+        }, 500);
     }
 };
 btnsToggleLoginForm.forEach((btn, index) => {

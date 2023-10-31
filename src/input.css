@@ -65,10 +65,10 @@
 }
 
 .down {
-	animation: down .8s ease-in forwards;
+	animation: down .5s ease-in-out forwards;
 }
 .up {
-	animation: up 1s ease-in forwards;
+	animation: up .7s ease-in-out forwards;
 }
 
 @tailwind utilities;

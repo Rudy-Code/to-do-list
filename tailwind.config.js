@@ -10,7 +10,7 @@ module.exports = {
 				center: true,
 			},
 			colors: {
-				
+				"darkIndigo": "#221451"
 			},
 		},
 	},

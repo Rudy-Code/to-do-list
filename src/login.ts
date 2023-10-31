@@ -21,7 +21,7 @@ const toogleLoginForm = (index: number) => {
 		registrationForm.classList.add('up')
 		setTimeout(() => {
 			loginForm.classList.add('hidden')
-		}, 800)
+		}, 500)
 	}
 }
 

@@ -17,7 +17,7 @@
 
 <body data-theme="synthwave">
 
-    <div class="message">
+    <div class="message relative z-50">
 
     </div>
 
@@ -35,54 +35,83 @@
             <!-- <img src="../img/logo.svg" class="w-10 lg:w-8" alt=""> -->
             <h1 class="text-sm w-2/3 lg:text-xl ">To Do list project RudyCode & Xayren</h1>
 
-            <ul class="hidden lg:flex items-center space-x-5 text-md">
+            <!-- <ul class="hidden lg:flex items-center space-x-5 text-md">
                 <li class="hover:underline"><a href="">home</a></li>
                 <li class="hover:underline"><a href="">about</a></li>
                 <li class="hover:underline"><a href="">works</a></li>
                 <li class="hover:underline"><a href="">contact</a></li>
-            </ul>
-            <a href="login.html" rel="noopener" class="btn btn-square">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-            </a>
-
-            <button class="btn btn-square ml-2" onclick="my_modal_5.showModal()"><svg xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                </svg>
-            </button>
-
-            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-                <div class="modal-box">
-                    <form method="dialog">
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                    </form>
-                    <h3 class="font-bold text-lg">Settings</h3>
-                    <p class="py-4">Create new category</p>
-
-                    <!-- Change theme -->
-
-                    <!-- delete alerts -->
-
-                    <div class="modal-action">
-                        <form method="dialog">
-                            <button class="btn save-settings" id="">Save</button>
-                        </form>
-                    </div>
+            </ul> -->
+            <div class="flex">
+                <div class="tooltip tooltip-bottom" data-tip="Login">
+                    <a href="login.html" rel="noopener" class="btn btn-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+                    </a>
                 </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
+
+                <div class="tooltip tooltip-bottom" data-tip="Settings">
+                    <button class="btn btn-square ml-2 lg:ml-4" onclick="my_modal_5.showModal()"><svg
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                        </svg>
+                    </button>
+                </div>
+
+
+                <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                    <div class="modal-box">
+                        <form method="dialog">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <h3 class="font-bold text-lg">Settings</h3>
+                        <p class="py-4">Create new category</p>
+                        <input type="text" class="input input-bordered bg-darkIndigo/30" placeholder="School">
+
+                        <!-- Change theme -->
+
+                        <p class="py-4">Change theme</p>
+                        <div class="indicator">
+                            <span class="indicator-item badge badge-neutral">Soon</span>
+                            <select name="" class="select select-bordered" id="">
+                                <option value="synthwave" selected>synthwave</option>
+                                <option value="synthwave" selected>dark</option>
+                                <option value="synthwave" selected>light</option>
+                            </select>
+                        </div>
+
+                        <!-- delete alerts -->
+                        <p class="py-4">Alerts settings</p>
+                        <label class="swap p-2 border border-base-content/20 rounded-lg">
+                            <input type="checkbox"/>
+                            <div class=" swap-on">ON
+                            </div>
+                            <div class="swap-off">OFF</div>
+                        </label>
+
+
+
+                        <div class="modal-action">
+                            <form method="dialog">
+                                <button class="btn save-settings" id="">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
+            </div>
+
         </div>
     </nav>
 
     <main class="mx-4 mt-5 mb-4 flex justify-center items-center">
-        <div class="container p-8 flex flex-col bg-[#221451] rounded-xl space-y-4">
+        <div class="container p-8 flex flex-col bg-darkIndigo rounded-xl space-y-4">
 
             <h2 class="text-xl">Add new task</h2>
 
@@ -105,13 +134,29 @@
                         <option value="hobby">Hobby</option>
                     </select>
                     <button class="btn-add-new-task btn mt-2"> Add</button>
-
                 </div>
 
             </form>
             <div class="todo">
                 <h2 class="text-2xl mt-3 mb-5">Tasks to do: </h2>
-                <ul class="tasks-list space-y-2 text-zinc-300 pl-1 "></ul>
+
+                <div class="mb-3">
+                    <select name="" class="select select-md" id="">
+                        <option value="all" selected>All</option>
+                        <option value="gym">Gym</option>
+                        <option value="homework">Homework</option>
+                        <option value="general">General</option>
+                        <option value="hobby">Hobby</option>
+                    </select>
+                </div>
+
+                <ul class="tasks-list pl-1  text-zinc-300 "></ul>
+            </div>
+            <div class="done">
+                <h2 class="text-2xl mt-3 mb-5">Tasks done: </h2>
+                <ul class="tasks-done-list space-y-2 text-zinc-300 pl-1 ">
+                    <li class="line-through text-zinc-400">Make site</li>
+                </ul>
             </div>
         </div>
     </main>
