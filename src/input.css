@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 
+/* .btn-dark{
+	background-color: rgba(14, 2, 41, 0.587);
+	border: none;
+} */
+
+
 .animate-progress-bar {
 	animation: progress-bar 2s ease-in-out;
 }
