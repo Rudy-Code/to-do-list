@@ -8,11 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	const message: HTMLDivElement = document.querySelector('.message')
 	const taskNameError: HTMLElement = document.querySelector('.task-name-error')
 	const selectSortCategory: HTMLSelectElement = document.querySelector('#select-sort-category')
+
+	// task
 	let btnsDoneTask: NodeList
+	let btnsEditTask: NodeList
+	let btnsDeleteTask: NodeList
+	const inputEditNameTask: HTMLInputElement = document.querySelector('#input-edit-name-task')
 
 	// settings
 	const btnSaveSettings: HTMLButtonElement = document.querySelector('.btn-save-settings')
 	const inputNewCategory: HTMLInputElement = document.querySelector('#input-new-category')
+	const btnShowAlerts: HTMLButtonElement = document.querySelector('.btn-show-alerts')
+	const btnEditNameTask: HTMLButtonElement = document.querySelector('.btn-edit-name-task')
 
 	let categories: string[] = ['gym', 'homework', 'general', 'hobby']
 
@@ -76,13 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		doneTaskList.innerHTML = ''
 
 		tasks.forEach((task, index) => {
-			let svgDoneClass
+			let svgDoneClass: string
 
 			task.done
 				? (svgDoneClass =
-						'transition-[fill] duration-500 linear fill-white stroke-black hover:fill-black hover:stroke-white')
+						'transition-[fill,stroke] duration-500 linear fill-white stroke-black hover:fill-black hover:stroke-white')
 				: (svgDoneClass =
-						'transition-[fill] duration-500 linear fill-black stroke-white hover:fill-white hover:stroke-black')
+						'transition-[fill,stroke] duration-500 linear fill-black stroke-white hover:fill-white hover:stroke-black')
 
 			const li = document.createElement('li')
 			li.innerHTML = `
@@ -98,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		  
 					</button>
 
-					<button class="btn-edit-task px-2">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+					<button class="btn-edit-task px-2" onclick="edit_name_task.showModal()">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition-[stroke] duration-300  stroke-zinc-200 hover:stroke-yellow-600">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
 		  				</svg>
 		  
@@ -107,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					<button class="btn-delete-task px-2">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-						stroke="currentColor" class="w-6 h-6">
+						stroke="currentColor" class="w-6 h-6 transition-[stroke] duration-300 stroke-white hover:stroke-[crimson]">
 							<path stroke-linecap="round" stroke-linejoin="round"
 							d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
 						</svg>
@@ -126,28 +133,28 @@ document.addEventListener('DOMContentLoaded', () => {
 				  	<ul class="dropdown-content p-2 space-y-2 shadow menu z-[1] bg-base-100 rounded-box w-15">
 					
 					  <button class="btn-done-task px-2">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 				stroke="currentColor" class="w-6 h-6 ${svgDoneClass}">
+					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+					  class="w-6 h-6 ${svgDoneClass}">
 						  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 						</svg>
 		
 				  </button>
 
 				  <button class="btn-edit-task px-2">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+					  class="w-6 h-6 transition-[stroke] duration-300  stroke-zinc-200 hover:stroke-yellow-600">
 						  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
 						</svg>
 		
 				  </button>
 
 				  <button class="btn-delete-task px-2">
-					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-					  stroke="currentColor" class="w-6 h-6">
+					  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
+					  stroke="currentColor" class="w-6 h-6 transition-[stroke] duration-300 stroke-white hover:stroke-[crimson]">
 						  <path stroke-linecap="round" stroke-linejoin="round"
 						  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
 					  </svg>
 				  </button>
-
-
 				  	</ul>
 				</details>
 				
@@ -198,11 +205,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const getTaskBtns = () => {
 		btnsDoneTask = document.querySelectorAll('.btn-done-task')
+		btnsEditTask = document.querySelectorAll('.btn-edit-task')
+		btnsDeleteTask = document.querySelectorAll('.btn-delete-task')
 
 		btnsDoneTask.forEach(btn => {
 			btn.addEventListener('click', (e: Event) => {
 				const taskIndex = (e.target as HTMLElement).closest('li').getAttribute('id')
 				tasks[taskIndex].done == true ? (tasks[taskIndex].done = false) : (tasks[taskIndex].done = true)
+				renderTasks(tasks)
+			})
+		})
+
+		btnsEditTask.forEach(btn => {
+			btn.addEventListener('click', (e: Event) => {
+				inputEditNameTask.placeholder = (e.target as HTMLElement).closest('li').querySelector('span').textContent
+				const taskIndex = Number((e.currentTarget as HTMLElement).closest('li').getAttribute('id'))
+				const taskDone: boolean = tasks[taskIndex].done
+				const taskCategory: string = tasks[taskIndex].category
+
+				btnEditNameTask.addEventListener('click', () => {
+					const newTaskName = inputEditNameTask.value
+					tasks.splice(Number(taskIndex), 1, {
+						id: taskIndex,
+						name: newTaskName,
+						done: taskDone,
+						category: taskCategory,
+					})
+					renderTasks(tasks)
+				})
+			})
+		})
+
+		btnsDeleteTask.forEach(btn => {
+			btn.addEventListener('click', (e: Event) => {
+				const taskIndex = (e.target as HTMLElement).closest('li').getAttribute('id')
+				tasks.splice(Number(taskIndex), 1)
 				renderTasks(tasks)
 			})
 		})
@@ -215,9 +252,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			renderCategories(categories)
 		}
 		inputNewCategory.value = ''
-		console.log(newCategory)
-		console.log(categories)
+		showAlerts = btnShowAlerts.textContent === 'ON' ? true : false
 	}
+
+	btnShowAlerts.addEventListener('click', () => {
+		btnShowAlerts.textContent === 'ON' ? (btnShowAlerts.textContent = 'OFF') : (btnShowAlerts.textContent = 'ON')
+	})
 
 	const sortViewCategory = () => {
 		const selectedCategory = selectSortCategory.value

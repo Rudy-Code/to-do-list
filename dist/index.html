@@ -63,7 +63,8 @@
                         </form>
                         <h3 class="font-bold text-lg">Settings</h3>
                         <p class="py-4">Create new category</p>
-                        <input type="text" class="input input-bordered bg-darkIndigo/30" id="input-new-category"  placeholder="School">
+                        <input type="text" class="input input-bordered bg-darkIndigo/30" id="input-new-category"
+                            placeholder="School">
 
                         <!-- Change theme -->
 
@@ -79,12 +80,7 @@
 
                         <!-- delete alerts -->
                         <p class="py-4">Alerts settings</p>
-                        <label class="swap p-2 border border-base-content/20 rounded-lg" id="test">
-                            <input type="checkbox" />
-                            <div class=" swap-on">ON
-                            </div>
-                            <div class="swap-off">OFF</div>
-                        </label>
+                        <button class="btn-show-alerts p-2 border border-base-content/20 rounded-lg">ON</button>
 
                         <div class="modal-action">
                             <form method="dialog">
@@ -149,6 +145,30 @@
                     <li class="line-through text-zinc-400">Make site</li>
                 </ul>
             </div>
+
+            <!-- edit_name_task -->
+
+            <dialog id="edit_name_task" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                    <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    
+                    <h3 class="font-bold text-lg">Edit name task</h3>
+                    <input type="text" class="input input-bordered mt-4 bg-darkIndigo/30" id="input-edit-name-task"
+                        placeholder="New task name">
+
+
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn-edit-name-task btn" id="">Edit</button>
+                        </form>
+                    </div>
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </div>
     </main>
     <footer></footer>
