@@ -35,8 +35,9 @@ Backend - Xayren
 - [x] Add functions for adding categories
 - [x] Add functions for ON/OFF alerts
 - [x] Create template for tasks
-- [ ] Repair edit task function
+- [x] Repair edit task function
 - [ ] Improve the appearance on larger devices
+- [ ] Add Enter key support for edit tasks
 - [ ] Add functions for changing the theme of the application
 - [ ] Add functions for deleting categories
 - [ ] Connect the script to the backend
