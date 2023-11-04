@@ -8,7 +8,6 @@
     <title>To Do list with Xayren</title>
     <meta name="description" content="To Do list with Xayren">
 
-    <!-- <script src="https://kit.fontawesome.com/58309639ce.js" crossorigin="anonymous"></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
@@ -21,22 +20,13 @@
 
     </div>
 
-    <!-- <div class="alert alert-success fixed top-0 left-0 rounded-[3px] flex ">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="text-sm">Your task has been successfully added!</span>
-        <span class="progress absolute -bottom-1 left-0 w-1/2 h-1 bg-green-700"></span>
-
-    </div> -->
     <nav class="py-6 mx-4 uppercase">
         <div class="container flex justify-between items-center">
             <h1 class="text-sm w-2/3 lg:text-xl ">To Do list project RudyCode & Xayren</h1>
 
             <div class="flex">
                 <div class="tooltip tooltip-bottom" data-tip="Login">
-                    <a href="login.html" rel="noopener" class="btn btn-square ">
+                    <a href="login.html" rel="noopener noreferrer" class="btn btn-square ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -110,17 +100,19 @@
                     <p class="task-name-error hidden text-error">Enter the name of the task.</p>
                 </div>
 
-                <div class="flex flex-col mt-2">
-                    <label for="select-categories" class="font-light mb-2">Category: </label>
-                    <select class="select-categories select" name="" id="select-categories">
-                        <option value="" selected disabled>Pick your category</option>
-                        <option value="">None</option>
-                        <option value="gym">Gym</option>
-                        <option value="homework">Homework</option>
-                        <option value="general">General</option>
-                        <option value="hobby">Hobby</option>
-                    </select>
-                    <button class="btn-add-new-task btn mt-2"> Add</button>
+                <div class="flex flex-col mt-2 md:flex-row md:items-end md:justify-between">
+                    <div class="flex flex-col md:flex-1 md:mr-5">
+                        <label for="select-categories" class="font-light mb-2">Category: </label>
+                        <select class="select-categories select" name="" id="select-categories">
+                            <option value="" selected disabled>Pick your category</option>
+                            <option value="">None</option>
+                            <option value="gym">Gym</option>
+                            <option value="homework">Homework</option>
+                            <option value="general">General</option>
+                            <option value="hobby">Hobby</option>
+                        </select>
+                    </div>
+                    <button class="btn-add-new-task btn mt-2 md:mt-0 md:flex-1"> Add</button>
                 </div>
 
             </form>
@@ -227,7 +219,6 @@
             <div class="done">
                 <h2 class="text-2xl mt-3 mb-5">Tasks done: </h2>
                 <ul class="done-task-list space-y-2 text-zinc-300 pl-1 ">
-                    
                 </ul>
             </div>
 

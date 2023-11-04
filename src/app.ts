@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		btnsDoneTask.forEach(btn => {
 			btn.addEventListener('click', (e: Event) => {
-				const taskIndex = Number((e.target as HTMLElement).closest('li').getAttribute('id'))
+				const taskIndex: number = Number((e.target as HTMLElement).closest('li').getAttribute('id'))
 				tasks[taskIndex].done == true ? (tasks[taskIndex].done = false) : (tasks[taskIndex].done = true)
 				renderTasks(tasks)
 			})
