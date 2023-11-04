@@ -184,27 +184,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 
-		const test = () => {
-			btnEditNameTask.removeEventListener('click', test)
+		const saveEditTask = () => {
+			btnEditNameTask.removeEventListener('click', saveEditTask)
 			const taskDone: boolean = tasks[taskIndex].done
 			const taskCategory: string = tasks[taskIndex].category
-
-			const saveEditTask = () => {
-				const newTaskName = inputEditNameTask.value
-				console.log(taskIndex)
-				console.log(newTaskName)
-				tasks.splice(Number(taskIndex), 1, {
-					id: taskIndex,
-					name: newTaskName,
-					done: taskDone,
-					category: taskCategory,
-				})
-				renderTasks(tasks)
-			}
-			saveEditTask()
+			const newTaskName = inputEditNameTask.value
+			tasks.splice(Number(taskIndex), 1, {
+				id: taskIndex,
+				name: newTaskName,
+				done: taskDone,
+				category: taskCategory,
+			})
+			renderTasks(tasks)
 			inputEditNameTask.value = ''
 		}
-		btnEditNameTask.addEventListener('click', test)
+		btnEditNameTask.addEventListener('click', saveEditTask)
 
 		btnsDeleteTask.forEach(btn => {
 			btn.addEventListener('click', (e: Event) => {
