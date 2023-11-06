@@ -192,24 +192,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 (taskList.innerHTML = `<p class="text-center text-zinc-400">No done tasks in this category</p>`);
         }
     };
-    btnAddNewTask.addEventListener('click', (e) => {
+    btnAddNewTask.addEventListener('click', async (e) => {
         e.preventDefault();
         selectedCategory = selectCategories.value;
         taskNameError.classList.add('hidden');
+      
         if (inputNewTask.value.trim() !== '') {
-            addNewTask({
-                id: tasks.length + 1,
-                name: inputNewTask.value,
-                done: false,
-                category: selectedCategory,
+          const newTask = {
+            title: inputNewTask.value,
+            category: selectedCategory,
+            completed: false,
+          };
+      
+          try {
+            const response = await fetch('/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(newTask),
             });
-            inputNewTask.value = '';
-            showAlerts && showSuccessMessage();
+      
+            if (response.ok) {
+              const createdTask = await response.json();
+      
+              addNewTask({
+                id: createdTask._id,
+                name: createdTask.title,
+                done: createdTask.completed,
+                category: createdTask.category,
+              });
+      
+              inputNewTask.value = '';
+              showAlerts && showSuccessMessage();
+            } else {
+              console.error('Error creating to-do:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error creating to-do:', error);
+          }
+        } else {
+          taskNameError.classList.remove('hidden');
         }
-        else {
-            taskNameError.classList.remove('hidden');
-        }
-    });
+      });
+      
     btnSaveSettings.addEventListener('click', saveSettings);
     selectSortCategory.addEventListener('change', sortViewCategory);
     renderTasks(tasks);
