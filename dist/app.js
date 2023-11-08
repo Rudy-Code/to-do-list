@@ -21,33 +21,77 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEditNameTask = document.querySelector('.btn-edit-name-task');
     let categories = ['gym', 'homework', 'general', 'hobby'];
     let selectedCategory;
-    const tasks = [
-        {
-            id: 0,
-            name: 'Go to the gym',
-            done: false,
-            category: 'gym',
-        },
-        {
-            id: 1,
-            name: 'Do homework',
-            done: true,
-            category: 'homework',
-        },
-        {
-            id: 2,
-            name: 'Buy milk',
-            done: false,
-            category: 'general',
-        },
-        {
-            id: 3,
-            name: 'Read a book',
-            done: false,
-            category: 'hobby',
-        },
-    ];
-    console.log(tasks);
+
+    
+    function convertJSONToObj(jsonArray) {
+        const obj = {};
+
+        for (const todo of jsonArray) {
+            obj[todo.id] = {
+                id: todo.id,
+                name: todo.name,
+                done: todo.done,
+                category: todo.category,
+            };
+        }
+
+        return obj;
+    }
+
+    async function fetchAndConvert() {
+        const response = await fetch('/todos');
+
+        if (response.ok) {
+            const todos = await response.json();
+            const todosObj = convertJSONToObj(todos);
+            return todosObj;
+        }
+    }
+
+    async function initializeTasks() {
+        const tasks = [
+            {
+                id: 0,
+                name: 'Go to the gym',
+                done: false,
+                category: 'gym',
+            },
+            {
+                id: 1,
+                name: 'Do homework',
+                done: true,
+                category: 'homework',
+            },
+            {
+                id: 2,
+                name: 'Buy milk',
+                done: false,
+                category: 'general',
+            },
+            {
+                id: 3,
+                name: 'Read a book',
+                done: false,
+                category: 'hobby',
+            },
+        ];
+
+        try {
+            const todosObj = await fetchAndConvert();
+
+            Object.values(todosObj).forEach(todo => {
+                tasks.push(todo);
+            });
+
+            return tasks;
+        } catch (error) {
+            console.error(error);
+            return tasks; 
+        }
+    }
+
+
+
     const renderCategories = (categories) => {
         selectCategories.innerHTML = '';
         selectSortCategory.innerHTML = '';
@@ -93,9 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         getTaskBtns();
     };
-    const addNewTask = (task) => {
-        tasks.push(task);
-        renderTasks(tasks);
+    const addNewTask = async (task) => {
+        try {
+            const currentTasks = await initializeTasks();
+
+            renderTasks(currentTasks);
+        } catch (error) {
+            console.error(error);
+        }
     };
     const showSuccessMessage = () => {
         message.innerHTML = '';
@@ -196,48 +245,51 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         selectedCategory = selectCategories.value;
         taskNameError.classList.add('hidden');
-      
+
         if (inputNewTask.value.trim() !== '') {
-          const newTask = {
-            title: inputNewTask.value,
-            category: selectedCategory,
-            completed: false,
-          };
-      
-          try {
-            const response = await fetch('/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(newTask),
-            });
-      
-            if (response.ok) {
-              const createdTask = await response.json();
-      
-              addNewTask({
-                id: createdTask._id,
-                name: createdTask.title,
-                done: createdTask.completed,
-                category: createdTask.category,
-              });
-      
-              inputNewTask.value = '';
-              showAlerts && showSuccessMessage();
-            } else {
-              console.error('Error creating to-do:', response.statusText);
+            const tasks = await initializeTasks();
+            const newTask = {
+                id: tasks.length + 1,
+                name: inputNewTask.value,
+                done: false,
+                category: selectedCategory,
+            };
+
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newTask),
+                });
+
+                if (response.ok) {
+
+                    addNewTask(newTask);
+
+                    inputNewTask.value = '';
+                    showAlerts && showSuccessMessage();
+                } else {
+                    console.error('Error creating to-do:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error creating to-do:', error);
             }
-          } catch (error) {
-            console.error('Error creating to-do:', error);
-          }
         } else {
-          taskNameError.classList.remove('hidden');
+            taskNameError.classList.remove('hidden');
         }
-      });
-      
+    });
+
     btnSaveSettings.addEventListener('click', saveSettings);
     selectSortCategory.addEventListener('change', sortViewCategory);
-    renderTasks(tasks);
+    initializeTasks()
+        .then(tasks => {
+            console.log(tasks);
+            renderTasks(tasks);
+        })
+        .catch(error => {
+            console.error(error);
+        });
     renderCategories(categories);
 });

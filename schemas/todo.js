@@ -1,27 +1,32 @@
 const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema({
-    title: {
+    id: {
+        type: Number,
+    },
+    name: {
         type: String,
         required: true,
     },
+    done: {
+        type: Boolean,
+        default: false,
+    },
     category: {
         type: String,
-    },
-    completed: {
-        type: Boolean,
         default: false,
     },
 });
 
 const Todo = mongoose.model('Todo', todoSchema);
 
-async function createTodo(title, category, completed = false) {
+async function createTodo( id, name, done = false, category ) {
     try {
         const newTodo = new Todo({
-            title,
+            id, 
+            name, 
+            done, 
             category,
-            completed,
         });
 
         const createdTodo = await newTodo.save();
