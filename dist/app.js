@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let categories = ['gym', 'homework', 'general', 'hobby'];
     let selectedCategory;
 
-    
+
     function convertJSONToObj(jsonArray) {
         const obj = {};
 
@@ -50,30 +50,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function initializeTasks() {
         const tasks = [
-            {
-                id: 0,
-                name: 'Go to the gym',
-                done: false,
-                category: 'gym',
-            },
-            {
-                id: 1,
-                name: 'Do homework',
-                done: true,
-                category: 'homework',
-            },
-            {
-                id: 2,
-                name: 'Buy milk',
-                done: false,
-                category: 'general',
-            },
-            {
-                id: 3,
-                name: 'Read a book',
-                done: false,
-                category: 'hobby',
-            },
+            // {
+            //     id: 0,
+            //     name: 'Go to the gym',
+            //     done: false,
+            //     category: 'gym',
+            // },
+            // {
+            //     id: 1,
+            //     name: 'Do homework',
+            //     done: false,
+            //     category: 'homework',
+            // },
+            // {
+            //     id: 2,
+            //     name: 'Buy milk',
+            //     done: false,
+            //     category: 'general',
+            // },
+            // {
+            //     id: 3,
+            //     name: 'Read a book',
+            //     done: false,
+            //     category: 'hobby',
+            // },
         ];
 
         try {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return tasks;
         } catch (error) {
             console.error(error);
-            return tasks; 
+            return tasks;
         }
     }
 
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         getTaskBtns();
     };
-    const addNewTask = async (task) => {
+    const addNewTask = async () => {
         try {
             const currentTasks = await initializeTasks();
 
@@ -207,11 +207,37 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         btnEditNameTask.addEventListener('click', saveEditTask);
         btnsDeleteTask.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const taskIndex = e.target.closest('li').getAttribute('id');
-                tasks.splice(Number(taskIndex), 1);
-                console.log(taskIndex);
-                renderTasks(tasks);
+            btn.addEventListener('click', async (e) => {
+                try {
+                    const currentTasks = await initializeTasks();
+                    const taskIndex = e.target.closest('li').getAttribute('id');
+
+
+                    currentTasks.splice(Number(taskIndex), 1);
+                    console.log(taskIndex);
+
+                    await fetch(`/${Number(taskIndex) + 1}`, {
+                        method: 'DELETE',
+                    });
+
+                    const tasksToUpdate = currentTasks.filter(task => task.id > taskIndex);
+
+                    console.log('Sending todos:', tasksToUpdate);
+                    await fetch('/todos', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(tasksToUpdate),
+                    });
+
+
+                    renderTasks(currentTasks);
+                    console.log(currentTasks);
+                }
+                catch (error) {
+                    console.error(error);
+                }
             });
         });
     };
@@ -227,18 +253,23 @@ document.addEventListener('DOMContentLoaded', () => {
     btnShowAlerts.addEventListener('click', () => {
         btnShowAlerts.textContent === 'ON' ? (btnShowAlerts.textContent = 'OFF') : (btnShowAlerts.textContent = 'ON');
     });
-    const sortViewCategory = () => {
-        const selectedCategory = selectSortCategory.value;
-        if (selectedCategory === 'all') {
-            renderTasks(tasks);
-        }
-        else {
-            const filteredTasks = tasks.filter(task => task.category === selectedCategory);
-            renderTasks(filteredTasks);
-            doneTaskList.innerHTML === '' &&
-                (doneTaskList.innerHTML = `<p class="text-center text-zinc-400">No tasks in this category</p>`);
-            taskList.innerHTML === '' &&
-                (taskList.innerHTML = `<p class="text-center text-zinc-400">No done tasks in this category</p>`);
+    const sortViewCategory = async () => {
+        try {
+            tasks = await initializeTasks();
+            const selectedCategory = selectSortCategory.value;
+            if (selectedCategory === 'all') {
+                renderTasks(tasks);
+            }
+            else {
+                const filteredTasks = tasks.filter(task => task.category === selectedCategory);
+                renderTasks(filteredTasks);
+                doneTaskList.innerHTML === '' &&
+                    (doneTaskList.innerHTML = `<p class="text-center text-zinc-400">No tasks in this category</p>`);
+                taskList.innerHTML === '' &&
+                    (taskList.innerHTML = `<p class="text-center text-zinc-400">No done tasks in this category</p>`);
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
     btnAddNewTask.addEventListener('click', async (e) => {
