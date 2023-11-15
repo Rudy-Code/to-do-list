@@ -37,13 +37,13 @@ Backend - Xayren
 - [x] Create template for tasks
 - [x] Repair edit task function
 - [x] Improve the appearance on larger devices
+- [x] Connect the script to the backend
+- [x] Add the ability to add tasks to the database
+- [x] Add the ability to delete tasks in the database
 - [ ] Add Enter key support for edit tasks
 - [ ] Add functions for changing the theme of the application
 - [ ] Add functions for deleting categories
-- [ ] Connect the script to the backend
-- [ ] Add the ability to add tasks to the database
 - [ ] Add the ability to edit tasks in the database
-- [ ] Add the ability to delete tasks in the database
 - [ ] Add the ability to add categories to the database
 - [ ] Add the ability to delete categories in the database
 
