@@ -56,6 +56,7 @@ Backend - Xayren
 2. Install NPM packages
 
    ```sh
+   cd to-do-list
    npm install i
    ```
 
