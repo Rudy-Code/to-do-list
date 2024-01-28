@@ -64,6 +64,8 @@ Backend - Xayren
 
    Open project in VS Code and open dist folder and next click the index.html. Run it with Live Server or open the index.html file in the browser.
 
+4. 4. or open the page by going to this link: <a href="https://rudy-code.github.io/to-do-list/dist/index.html"> https://rudy-code.github.io/to-do-list/dist/index.html </a>
+
 ## Version History
 
 - alpha
