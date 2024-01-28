@@ -62,11 +62,11 @@ Backend - Xayren
 
 3. Run the project
 
-   Open project in VS Code and run the project with Live Server or open the index.html file in the browser.
+   Open project in VS Code and open dist folder and next click the index.html. Run it with Live Server or open the index.html file in the browser.
 
 ## Version History
 
--
+- alpha
 
 <!-- ## Credits -->
 
